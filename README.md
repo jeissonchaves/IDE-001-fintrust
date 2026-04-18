@@ -11,7 +11,7 @@ FinTrust es una fintech de crédito de consumo. El objetivo es transformar datos
 ## Estructura del proyecto
 
 ```
-├── data/                        # CSVs de datos fuente (se cargan a GCS)
+├── data/
 │   ├── customers.csv
 │   ├── loans.csv
 │   ├── installments.csv
@@ -20,17 +20,17 @@ FinTrust es una fintech de crédito de consumo. El objetivo es transformar datos
 ├── sql/
 │   ├── 01-raw/                  # DDL: creación de tablas fuente en BigQuery
 │   ├── 02-staging/              # Limpieza y estandarización
-│   ├── 03-analytics/            # Modelo estrella (dimensiones + hechos)
+│   ├── 03-analytics/            # Modelo estrella
 │   └── 04-queries-negocio/      # Consultas que responden las 5 preguntas de negocio
 │
 ├── python/
 │   ├── pipeline.py              # Orquestador del pipeline ETL
-│   ├── validations.py           # Checks de calidad de datos post-carga
+│   ├── validations.py           # Checks de calidad de datos
 │   └── requirements.txt
 │
 ├── docs/
 │   ├── decisiones-tecnicas.md   # Supuestos, reglas y decisiones de diseño
-│   └── evidencia-calidad-datos.md  # Registro de problemas encontrados y tratados
+│   └── evidencia-calidad-datos.md  # Registro de problemas encontrados
 │
 └── .env.example                 # Plantilla de variables de entorno
 ```
@@ -89,19 +89,17 @@ Asegurar que los archivos CSv existen en GCS.
 
 ```bash
 cd python
-
 python pipeline.py
 ```
 
-## Tablas fuente (`raw_fintrust`)
+## Tablas fuente
 
-| Tabla | Descripción | Registros |
-|---|---|---|
-| `customers` | 35 clientes | C001–C035 |
-| `loans` | 45 créditos | L001–L045 |
-| `installments` | 135 cuotas programadas | I001–I135 |
-| `payments` | 107 pagos recibidos | P001–P107 |
-
+| Tabla | Descripción |
+|---|---|
+| `customers` | 35 clientes |
+| `loans` | 45 créditos |
+| `installments` | 135 cuotas programadas |
+| `payments` | 107 pagos recibidos |
 ## Decisiones clave
 
 Ver [`docs/decisiones-tecnicas.md`](docs/decisiones-tecnicas.md) para supuestos de diseño, decisiones arquitectónicas y riesgos conocidos.
